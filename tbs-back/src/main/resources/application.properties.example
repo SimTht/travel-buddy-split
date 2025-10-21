@@ -2,7 +2,7 @@
 spring.application.name=travel-buddy-split
 
 # Configuration de la source de données
-spring.datasource.url= 'mettre url bdd'
+spring.datasource.url= jdbc:postgresql://localhost:5432/'mettre nom bdd'
 spring.datasource.username= 'mettre nom utilisateur bdd'
 spring.datasource.password= 'mettre mot de passe bdd'
 spring.datasource.driver-class-name=org.postgresql.Driver
