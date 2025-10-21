@@ -61,7 +61,6 @@ create table expenses (
   payer_id bigint not null references users(id),
   title varchar(180) not null,
   amount numeric(12,2) not null check (amount >= 0),
-  paid_at timestamptz not null default now(),
   notes text
 );
 create index idx_expense_trip on expense(trip_id);
