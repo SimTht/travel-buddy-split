@@ -20,5 +20,7 @@ public class Activity {
     @Column(name = "end_at") private OffsetDateTime endAt;
     private String location;
 
-    @Lob private String notes;
+    //@Lob
+    @Column(columnDefinition = "text")
+    private String notes;
 }

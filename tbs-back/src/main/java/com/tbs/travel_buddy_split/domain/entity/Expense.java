@@ -2,7 +2,6 @@ package com.tbs.travel_buddy_split.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
 @Entity @Table(name = "expenses")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
@@ -23,5 +22,7 @@ public class Expense {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal amount;
 
-    @Lob private String notes;
+    //@Lob
+    @Column(columnDefinition = "text")
+    private String notes;
 }

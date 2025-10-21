@@ -3,10 +3,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.OffsetDateTime;
 
-@Entity @Table(name = "accomodations")
+@Entity @Table(name = "accommodations")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Accomodation {
+public class Accommodation {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
@@ -15,10 +15,14 @@ public class Accomodation {
     private Trip trip;
 
     @Column(nullable = false, length = 180) private String name;
-    @Lob private String address;
+    // @Lob
+    @Column(columnDefinition = "text")
+    private String address;
 
     @Column(name = "check_in") private OffsetDateTime checkIn;
     @Column(name = "check_out") private OffsetDateTime checkOut;
 
-    @Lob private String notes;
+    // @Lob
+    @Column(columnDefinition = "text")
+    private String notes;
 }

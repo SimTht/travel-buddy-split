@@ -1,7 +1,6 @@
 package com.tbs.travel_buddy_split.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.OffsetDateTime;
 import com.tbs.travel_buddy_split.domain.enums.MemberRole;
 
 @Entity @Table(

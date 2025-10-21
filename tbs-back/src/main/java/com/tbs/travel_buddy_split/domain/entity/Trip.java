@@ -2,7 +2,6 @@ package com.tbs.travel_buddy_split.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Entity @Table(name = "trips")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
