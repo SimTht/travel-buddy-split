@@ -24,5 +24,59 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  backend-dev:
+    profiles: ["dev"]
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.dev
+    container_name: tbs-backend-dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      TZ: Europe/Paris
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../:/app:delegated           #TODO : vérifier l'utilité
+      - m2:/root/.m2
+    develop:
+      watch:
+        - action: sync
+          path: ../src
+          target: /app/src
+          initial_sync: true
+          ignore: ["**/target/**"]
+        - action: sync+restart
+          path: ../src/main/resources
+          target: /app/src/main/resources
+        - action: rebuild
+          path: ../pom.xml
+
+  backend-prod:
+    profiles: ["prod"]
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    container_name: tbs-backend-prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      TZ: Europe/Paris
+    ports:
+      - "8080:8080"
+
 volumes:
   pgdata:
+  m2:
